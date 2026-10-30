@@ -140,17 +140,27 @@ python scripts/predict_image.py --source "path/to/road.jpg" --model models/basel
 python scripts/predict_image.py --source "path/to/road.jpg" --model models/compare_yolo11s_best.pt --output .local/compare-s-01 --device cpu
 ```
 
-这是依次运行两个模型并保存各自结果；双模型网页对比与预测融合尚未实现。
+这是依次运行两个模型并保存各自结果。在交互式网页中，已原生支持**双模型并排同图对比**与综合结果导出；预测级融合（Ensemble）仍需统一数据与训练后进一步探索。
 
 ---
 
-### 4. 运行人工复核 Demo
+### 4. 运行人工复核交互演示 (Web App)
 
-图片上传网页现可在项目根目录下运行 `python demo/web_app.py`，在 `http://127.0.0.1:7860` 上传原始道路图片，选择 n/s 模型、阈值和 CPU/CUDA:0，查看叠框图、复核建议并导出 JSON。完整参数见 [demo/README.md](demo/README.md)。
+推荐在项目根目录运行统一启动入口 `python run_demo.py`（Windows 也可直接双击 `start_demo.cmd`）。启动器会自动识别项目环境并探测空闲端口（默认 7860，被占用时自动顺延），避免多进程冲突。
+
+网页支持：
+- **单模型快速排查**：选择模型（YOLO11n / YOLO11s）与阈值，查看缺陷叠框、四类统计、优先级建议并导出单次 JSON。
+- **双模型同图并排对比**：同图同推理配置并行查看两个模型的检出框差异与统计表格，一键下载对比诊断 JSON。
+- **60 张跨国分层样例库**：支持按捷克、印度、美国及 4 类病害筛选，展开可实时核对原始标注参考（青色框）。
+
+完整参数与交接指南见 [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) 及 [demo/README.md](demo/README.md)。
 
 ```bash
 # 启动 Gradio 交互式网页
-python demo/web_app.py
+python run_demo.py
+
+# 自动化验证网页接口、叠框与导出授权
+python scripts/smoke_demo.py --device auto
 
 # 离线批量图片或短视频生成
 python demo/demo.py --source "path/to/images-or-video" --output ".local/demo.mp4" --device cpu --max-frames 120
