@@ -1,5 +1,19 @@
 """
-Automated PowerPoint Presentation Deck Generator
+DEPRECATED (2026-11-12) - HISTORICAL REFERENCE ONLY. DO NOT REGENERATE THE DELIVERABLE.
+
+The authoritative deck is the 21-slide English presentation at
+`submission/CDS540_Final_Presentation_Deck.pptx` (merged via PR #5, commit 84ae5ee),
+shipped with `submission/RoadInsight_Demo_EN.mp4`, `submission/RoadInsight_Demo_EN.srt`
+and `submission/presentation_support/` (including a SHA256 checksum manifest).
+This legacy script still builds the old 18-slide draft into `reports/`, and its
+wording predates DECISIONS.md D08 (it still says "Unseen US Highway Evaluation").
+Running it cannot reproduce the current deck; it would produce a stale,
+non-compliant draft that could be mistaken for the submission. The current deck
+is a separately delivered artifact: editing it requires the PR #5 toolchain so
+the checksum manifest and the three PNG previews are regenerated together.
+
+--------------------------------------------------------------------------
+Automated PowerPoint Presentation Deck Generator (legacy)
 Course: CDS540 Computer Vision
 Project: Automated Road Damage Detection for Smart City Maintenance
 

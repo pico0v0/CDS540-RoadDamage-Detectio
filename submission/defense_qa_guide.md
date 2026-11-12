@@ -100,3 +100,22 @@
 
 **If pressed, add:**
 > *"Triage score Spearman rho was 0.995 overall and 0.951 across the 18 detected frames. Varying assumed lane width from 3.0 m to 4.0 m shifted estimated_ground_area_m2 linearly (+/-14.3%, 5.50 to 7.33 m^2) with zero tier changes across those 18 frames. Automated Hough vanishing-point calibration succeeded on only 9/40 frames (22.5%), confirming metric grading requires calibrated stereo or LiDAR sensors."*
+
+---
+
+### Metric Cross-Reference Note (added 2026-11-12, post-merge)
+
+*This is a briefing note for presenters, **not** a verbatim model answer. Do not read it aloud; it does not count against the 30-45 s budget of Q1-Q8.*
+
+Two different mAP@50 pairs appear across the deliverables. **Both are recorded measurements, not errors:**
+
+- `0.2169` (YOLO11n) / `0.2846` (YOLO11s) - formal report Table 1 and `results/model_comparison.csv`. This is the figure used in the report PDF and in Q1-Q8 above.
+- `≈0.209` / `≈0.286` - slide 9 of the 21-slide English deck, from `results/revalidation_2026-10-16/metrics_summary.csv`, rows `source,n,default_025` (`0.208727`) and `source,s,default_025` (`0.285524`), measured under a **common-inference re-check protocol** (CPU, `rect=true`, `conf=0.25`, `imgsz=640`). The deck labels this explicitly as "Common inference settings".
+
+These are two evaluation protocols, not a value being corrected: **do not present one as a fix of the other, and do not average or mix them.** The two available checkpoints also have different training histories (deck slide 8), so the gap should not be attributed to model scale alone.
+
+**Name collision to watch:** the `0.209` in Question 4 above refers to **D00 class AP** (`0.2092`), *not* YOLO11n overall mAP@50. Same digits, different quantity.
+
+If a listener compares the deck with the report, answer briefly: *"The slide uses a common-inference re-check recorded in `metrics_summary.csv`; the report table uses the original comparison run. Both are in the repository, and no new experiment was run for the deck."*
+
+Registered as **D-9** in `submission/v2_candidates/discrepancy_log.md`.

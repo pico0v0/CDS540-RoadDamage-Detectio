@@ -24,7 +24,12 @@
 
 [85 秒英文字幕演示](submission/RoadInsight_Demo_EN.mp4)、[SRT 字幕](submission/RoadInsight_Demo_EN.srt)、[讲稿与交接说明](submission/presentation_support/README.md) 已随 PPT 提供。PPT 和视频应下载到同一目录，第 19 页可打开视频。正式演示前仍需在答辩电脑上试播。
 
-演示界面对应 [工作台 PR #4](https://github.com/pico0v0/CDS540-RoadDamage-Detectio/pull/4)，运行该分支或包含其改动的 main 才会得到相同界面。本次演示材料更新没有修改应用代码、模型、数据划分或最终报告；Render 仍是待确认方案。
+演示界面对应的 [工作台 PR #4](https://github.com/pico0v0/CDS540-RoadDamage-Detectio/pull/4) **已合并进 `main`**（PR #5 亦已合并），直接拉取最新 `main` 并重启程序即可得到视频中的界面。本次演示材料更新没有修改应用代码、模型、数据划分或最终报告；Render 仍是待确认方案。
+
+> **交付物维护说明（2026-11-12 合并后）**
+> - 21 页英文 PPT 是随 PR #5 独立交付的成品；`scripts/generate_presentation_pptx.py` 是旧的 18 页草稿生成脚本，已标注 **DEPRECATED**，不要重跑。修改 PPT 需同步更新 `submission/presentation_support/文件校验清单.json` 的 SHA256 以及三张 PPT 预览图，否则清单与成品不一致。
+> - 案例库 60 张图片仍在被忽略的 `.local/demo_samples`，新克隆的电脑需运行 `scripts/prepare_demo_samples.py --archive-root <三个国家 ZIP 所在目录>`；分析区的 18 张诊断参考图已随 `demo/assets/lab_cases/` 进入仓库，不需要原始 ZIP。
+> - 指标口径：PPT 第 9 页的 `0.209 / 0.286 mAP50` 来自 `results/revalidation_2026-10-16/metrics_summary.csv`（共同推理复核协议），与正式报告的 `0.2169 / 0.2846`（`results/model_comparison.csv`）属于**两套评测口径**，不可混用或互相替代。登记见 [D-9](submission/v2_candidates/discrepancy_log.md)，答辩口径见 `submission/defense_qa_guide.md` 末尾的 Metric Cross-Reference Note。
 
 ---
 

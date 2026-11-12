@@ -2,6 +2,7 @@
 
 > **Scope**: Documents factual inconsistencies, outdated statements, and wording boundary violations identified across existing project files during the C-Tier Technical Upgrade (2026-11-12).
 > **Policy (R1 / R6)**: No original files in `reports/`, `submission/`, `results/`, or root `README.md` have been altered in place. All proposed fixes below are candidates for review prior to final report/slide merging.
+> **Post-merge note (2026-11-12)**: D-1 through D-8 were recorded while the C-Tier work was still a candidate. After PR #4 / #5 were merged into `main`, the project owner authorized direct maintenance of root `README.md`, `CHANGELOG_C.md`, `submission/defense_qa_guide.md` and the legacy deck generator. **D-9 onward are post-merge maintenance entries**, not R1/R6 candidate proposals.
 
 ---
 
@@ -10,7 +11,7 @@ A duplicate set of deliverables (`CDS540_Final_Project_Report.{md,pdf}`, `CDS540
 
 ---
 
-## Registered Discrepancies (D-1 through D-8)
+## Registered Discrepancies (D-1 through D-9)
 
 | ID | File & Location | Observed Discrepancy | Proposed Revision |
 |---|---|---|---|
@@ -22,3 +23,4 @@ A duplicate set of deliverables (`CDS540_Final_Project_Report.{md,pdf}`, `CDS540
 | **D-6** | `README.md` (passim), `reports/CDS540_Final_Project_Report.md` §3 (L66) & §8.2 (L177), `scripts/priority.py` (L51) | Uses terms such as *"HUD Telemetry Overlay & Dispatch"* and *"Urgent repair crew dispatch (24-48h)"*, which can be misread as autonomous work-order dispatch. | Per `DECISIONS.md` D06 and Rule R5, standardize terminology to **human-in-the-loop triage proxy / prioritization aid** requiring certified engineer sign-off, avoiding any implication of automated physical repair dispatch or true structural severity grading. |
 | **D-7** | `README.md` Quick Navigation Table (L24) | Links the submission ZIP archive as located in the project root (`[CDS540_RoadDamage_Submission_Pack.zip](...)`), whereas the actual packaging output lives under `submission/` (`scripts/package_submission_zip.py` targets `submission/CDS540_RoadDamage_Submission_Pack.zip`). | Update the link in the `README.md` navigation table to point to `submission/CDS540_RoadDamage_Submission_Pack.zip` (when packaged) or note its `submission/` output directory. |
 | **D-8** | `scripts/benchmark_runtime.py` docstring (L8, L11) & `benchmark_model()` defaults (L41) vs. `main()` call site (L204) | Top docstring and `benchmark_model()` default signature specify `50 warmup + 200 frames`, whereas `main()` L204 overrides both with `num_warmup=30, num_runs=100`. | Align the docstring/signature or `main()` arguments in a future cleanup so `runtime.csv` provenance (30 warmup / 100 frames) matches script documentation. |
+| **D-9** (post-merge) | `submission/CDS540_Final_Presentation_Deck.pptx` slide 9 (`0.209 / 0.286 mAP50`) vs. `submission/CDS540_Final_Project_Report.md` Table 1 / `results/model_comparison.csv` (`0.2169 / 0.2846`); also `submission/defense_qa_guide.md` Q4 (`0.209`) | The 21-slide English deck (PR #5) reports `≈0.209 / 0.286 mAP50` for YOLO11n / YOLO11s, while the formal report and Q1-Q8 use `0.2169 / 0.2846`. Verified source of the deck figures: `map50 = 0.208727 / 0.285524` in `results/revalidation_2026-10-16/metrics_summary.csv` (`source,n/s,default_025`, CPU, `rect=true`, `conf=0.25`, common-inference re-check protocol) - **not** a mislabelled per-class AP and **not** a new experiment. Separately, Q4's `0.209` is **D00 class AP** (`0.2092`), a different quantity with the same digits. | Do **not** align, average, or present either pair as a correction of the other; cite the protocol difference. A `Metric Cross-Reference Note` has been appended to `submission/defense_qa_guide.md`, and provenance is stated in root `README.md` and `CHANGELOG_C.md` §5. Adding a one-line source footnote on slide 9 is **optional**; if done, it requires the PR #5 toolchain so the SHA256 checksum manifest and the three PNG previews are regenerated together. |
